@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace PhoneBookAppWithFile.Services
 {
@@ -27,6 +22,13 @@ namespace PhoneBookAppWithFile.Services
             {
                 File.Create(filePath).Close();
             }
+        }
+
+        public string CreateName(string name)
+        {
+            File.AppendAllText(filePath, name);
+
+            return name;
         }
     }
 }

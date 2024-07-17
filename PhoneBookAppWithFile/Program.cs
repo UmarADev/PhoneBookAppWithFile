@@ -9,7 +9,10 @@ namespace PhoneBookAppWithFile
         {
             IFileService fileService = new FileService();
 
-            Console.ReadLine();
+            Console.WriteLine("Enter name:");
+            string name = Console.ReadLine();
+
+            fileService.CreateName(name);
         }
     }
 }
