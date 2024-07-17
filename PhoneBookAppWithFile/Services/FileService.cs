@@ -10,7 +10,7 @@ namespace PhoneBookAppWithFile.Services
     internal class FileService : IFileService 
     {
         private ILoggingService loggingService;
-        private const string filePath = "phoneBook.txt";
+        private const string filePath = "../../../phoneBook.txt";
 
         public FileService()
         {
