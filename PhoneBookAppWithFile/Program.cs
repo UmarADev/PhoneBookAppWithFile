@@ -7,7 +7,7 @@ namespace PhoneBookAppWithFile
     {
         static void Main(string[] args)
         {
-            IFileService fileService = new FileService();
+            IFileService fileService = new JsonFileService();
 
             Console.WriteLine("Enter name:");
             string name = Console.ReadLine();

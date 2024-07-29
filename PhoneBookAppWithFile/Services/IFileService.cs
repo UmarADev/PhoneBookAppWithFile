@@ -1,7 +1,12 @@
-﻿namespace PhoneBookAppWithFile.Services
+﻿using PhoneBookAppWithFile.Models;
+using System.Collections.Generic;
+
+namespace PhoneBookAppWithFile.Services
 {
     internal interface IFileService
     {
-        public string CreateName(string name);
+        Contact AddContact(Contact contact);
+        bool DeleteContact(string phoneNumber);
+        List<Contact> ReadAllContacts();
     }
 }
