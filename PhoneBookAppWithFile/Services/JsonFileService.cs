@@ -17,15 +17,6 @@ namespace PhoneBookAppWithFile.Services
             CreateFileIfNotExists();
         }
 
-        private void CreateFileIfNotExists()
-        {
-            var isFileExists = File.Exists(filePath);
-            if (isFileExists is false)
-            {
-                File.Create(filePath).Close();
-            }
-        }
-
         public Contact AddContact(Contact contact)
         {
             var jsonContact = JsonSerializer.Serialize(contact);
@@ -77,6 +68,15 @@ namespace PhoneBookAppWithFile.Services
             }
 
             return contacts;
+        }
+        
+        private void CreateFileIfNotExists()
+        {
+            var isFileExists = File.Exists(filePath);
+            if (isFileExists is false)
+            {
+                File.Create(filePath).Close();
+            }
         }
     }
 }
