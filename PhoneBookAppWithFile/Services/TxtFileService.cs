@@ -1,9 +1,7 @@
 ﻿using PhoneBookAppWithFile.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace PhoneBookAppWithFile.Services
 {
@@ -20,7 +18,8 @@ namespace PhoneBookAppWithFile.Services
 
         public Contact AddContact(Contact contact)
         {
-            throw new NotImplementedException();
+            File.AppendAllText(filePath, contact.Name + "\t: " + contact.PhoneNumber + Environment.NewLine);
+            return contact;
         }
 
         public bool DeleteContact(string phoneNumber)
@@ -35,7 +34,12 @@ namespace PhoneBookAppWithFile.Services
 
         private void CreateFileIfNotExists()
         {
-            throw new NotImplementedException();
+            var isFileExists = File.Exists(filePath);
+
+            if (isFileExists is false)
+            {
+                File.Create(filePath).Close();
+            }
         }
     }
 }
