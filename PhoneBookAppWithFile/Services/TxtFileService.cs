@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text.Json;
 
 namespace PhoneBookAppWithFile.Services
 {
@@ -18,18 +20,48 @@ namespace PhoneBookAppWithFile.Services
 
         public Contact AddContact(Contact contact)
         {
-            File.AppendAllText(filePath, contact.Name + "\t: " + contact.PhoneNumber + Environment.NewLine);
+            File.AppendAllText(filePath, contact.Name + " " + contact.PhoneNumber + Environment.NewLine);
             return contact;
         }
 
         public bool DeleteContact(string phoneNumber)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Enter the name: ");
+            string name = Console.ReadLine();
+
+            if (filePath.Contains(phoneNumber) == true)
+            {
+                List<string> txtFile = File.ReadAllLines(filePath).ToList();
+
+                string deleteTxtFileObject = name + phoneNumber;
+
+                txtFile.Remove(deleteTxtFileObject);
+
+                File.WriteAllLines(filePath, txtFile);
+
+                loggingService.LogInformation("Succesfully deleted!");
+            }
+            return true;
         }
 
         public List<Contact> ReadAllContacts()
         {
-            throw new NotImplementedException();
+            List<Contact> phoneContacts = new List<Contact>();
+
+            string[] allLines = File.ReadAllLines(filePath);
+
+            foreach (string line in allLines)
+            {
+                var contact = new Contact();
+                string[] words = line.Split(" ");
+
+                contact.Name = words[0];
+                contact.PhoneNumber = words[1];
+
+                phoneContacts.Add(contact);
+            }
+
+            return phoneContacts;
         }
 
         private void CreateFileIfNotExists()
